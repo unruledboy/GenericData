@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ServerConfig>
+  <Connections>
+    <Connection Id="Test" ConnectionType="SQLServer">Data Source=(localdb)\v11.0;Initial Catalog=Test;Integrated Security=True</Connection>
+  </Connections>
+  <Schemas>
+    <Schema Id="TestUser" Connection="Test" CommandText="sp_InsertTest" CommandType="StoredProcedure" CRUD="Create">
+      <Parameters>
+        <Parameter Name="Id" DataType="Guid" />
+        <Parameter Name="FullName" DataType="String" Size="50" />
+        <Parameter Name="Country" DataType="String" Size="50" />
+        <Parameter Name="Birthday" DataType="DateTime" />
+        <Parameter Name="IsMale" DataType="Boolean" />
+        <Parameter Name="Category" DataType="Int32" />
+        <Parameter Name="Invoice" DataType="Double" />
+        <Parameter Name="CreatedDate" DataType="DateTime" />
+      </Parameters>
+    </Schema>
+  </Schemas>
+</ServerConfig>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ClientConfig>
+  <Schemas>
+    <Schema Id="TestUser" CRUD="Create">
+      <Parameters>
+        <Parameter Name="Id" DataType="Guid" />
+        <Parameter Name="FullName" DataType="String" Size="50" />
+        <Parameter Name="Country" DataType="String" Size="50" />
+        <Parameter Name="Birthday" DataType="DateTime" />
+        <Parameter Name="IsMale" DataType="Boolean" />
+        <Parameter Name="Category" DataType="Int32" />
+        <Parameter Name="Invoice" DataType="Double" />
+        <Parameter Name="CreatedDate" DataType="DateTime" />
+      </Parameters>
+    </Schema>
+  </Schemas>
+</ClientConfig>
