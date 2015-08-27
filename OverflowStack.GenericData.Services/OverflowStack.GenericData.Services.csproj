@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,8 +126,10 @@
     <Compile Include="Logic\Core\DataFactory.cs" />
     <Compile Include="Logic\Core\HandlerFactory.cs" />
     <Compile Include="Logic\DataAccess\SqlDataAccess.cs" />
+    <Compile Include="Logic\DataProcessor.cs" />
     <Compile Include="Logic\Handlers\GenericHandler.cs" />
     <Compile Include="Logic\Core\ConfigReader.cs" />
+    <Compile Include="Logic\Pulser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

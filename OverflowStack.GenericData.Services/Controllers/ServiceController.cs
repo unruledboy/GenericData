@@ -1,23 +1,20 @@
-﻿using System.Web.Hosting;
-using System.Web.Http;
-using OverflowStack.GenericData.Services.Logic.Core;
+﻿using System.Web.Http;
+using OverflowStack.GenericData.Services.Logic;
 using OverflowStack.GenericData.SharedDomains.Models;
 
 namespace OverflowStack.GenericData.Services.Controllers
 {
     public class ServiceController : ApiController
     {
-        public Response Accept(Request id)
+        [HttpGet]
+        public PulseResponse Pulse()
         {
-            Response response = null;
-            var config = new ConfigReader(HostingEnvironment.MapPath("~/App_Data/ServerConfig.xml")).Read();
-            var handlers = HandlerFactory.Find(id);
-            foreach (var handler in handlers)
-            {
-                if (handler.Process(id, config, out response))
-                    break;
-            }
-            return response;
+            return Pulser.Pulse();
+        }
+
+        public BaseResponse Accept(Request id)
+        {
+            return DataProcessor.Process(id);
         }
     }
 }

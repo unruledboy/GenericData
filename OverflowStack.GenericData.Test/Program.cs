@@ -11,28 +11,35 @@ namespace OverflowStack.GenericData.Test
         static void Main(string[] args)
         {
             var client = new DataClient(new Uri("http://localhost:52524/"), string.Format(@"{0}\ClientConfig.xml", AppDomain.CurrentDomain.BaseDirectory));
-            var response = TestAdd(client);
-            if (response != null)
+            var pulse = client.Pulse();
+            if (pulse.Result != null)
             {
-                OutputResponse(response);
-
-                //expecting Id
-                var records = response.Payload.Data.Records;
-                if (records.Any())
+                Console.WriteLine("service status: {0}", pulse.Result.Status);
+                var response = TestAdd(client);
+                if (response != null)
                 {
-                    Console.WriteLine("record created, press enter to update the record");
-                    Console.ReadLine();
-                    response = TestUpdate(client, records.First());
                     OutputResponse(response);
+
+                    //expecting Id
+                    var records = response.Payload.Data.Records;
+                    if (records.Any())
+                    {
+                        Console.WriteLine("record created, press enter to update the record");
+                        Console.ReadLine();
+                        response = TestUpdate(client, records.First());
+                        OutputResponse(response);
+                    }
+                    Console.WriteLine("record updated");
                 }
-                Console.WriteLine("record updated");
+                else
+                    Console.WriteLine("oops");
             }
             else
-                Console.WriteLine("oops");
+                Console.WriteLine("service down");
             Console.Read();
         }
 
-        private static Response TestUpdate(DataClient client, DataRecord record)
+        private static DataResponse TestUpdate(DataClient client, DataRecord record)
         {
             var payload = client.BuildPayload("TestUser", new List<object> { record.Values[0], "John Doe", "America", "1989-02-28", false, 23, 135.79, DateTime.Now });            
             var request = client.BuildRequest(payload, "update", "1234", "user1");
@@ -40,9 +47,9 @@ namespace OverflowStack.GenericData.Test
             return response.Result;
         }
 
-        private static void OutputResponse(Response response)
+        private static void OutputResponse(DataResponse dataResponse)
         {
-            var data = response.Payload.Data;
+            var data = dataResponse.Payload.Data;
             foreach (var column in data.Columns)
             {
                 Console.Write("{0}\t", column);
@@ -58,7 +65,7 @@ namespace OverflowStack.GenericData.Test
             }
         }
 
-        private static Response TestAdd(DataClient client)
+        private static DataResponse TestAdd(DataClient client)
         {
             var payload = client.BuildPayload("TestUser", new List<object> {Guid.Empty, "Jane Citizen", "Australia", "1985-01-23", true, 12, 345.678, DateTime.Now});
             var request = client.BuildRequest(payload, "add", "1234", "user1");

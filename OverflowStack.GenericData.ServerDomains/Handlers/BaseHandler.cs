@@ -7,6 +7,6 @@ namespace OverflowStack.GenericData.ServerDomains.Handlers
     {
         public abstract string Handler { get; }
 
-        public abstract bool Process(Request request, ServerConfig config, out Response response);
+        public abstract bool Process(Request request, ServerConfig config, out DataResponse dataResponse);
     }
 }

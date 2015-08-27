@@ -39,9 +39,12 @@
   <ItemGroup>
     <Compile Include="Models\DataRecord.cs" />
     <Compile Include="Models\DataList.cs" />
+    <Compile Include="Models\ErrorResponse.cs" />
+    <Compile Include="Models\PulseResponse.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Payload.cs" />
-    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\DataResponse.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />

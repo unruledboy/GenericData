@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Overflow Stack")]
 [assembly: AssemblyProduct("OverflowStack.GenericData.ClientDomains")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCopyright("Overflow Stack")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

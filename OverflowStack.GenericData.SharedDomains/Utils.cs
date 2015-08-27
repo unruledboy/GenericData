@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+using OverflowStack.GenericData.SharedDomains.Models;
 
 namespace OverflowStack.GenericData.SharedDomains
 {
@@ -24,6 +25,11 @@ namespace OverflowStack.GenericData.SharedDomains
                 }
             }
             return result;
+        }
+
+        public static T CreateResponse<T>(bool successful = true, string tag = "") where T : BaseResponse, new()
+        {
+            return new T { CreatedDate = DateTime.Now.ToUniversalTime(), Id = Guid.NewGuid(), Successful = successful, Tag = tag };
         }
     }
 }

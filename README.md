@@ -21,7 +21,8 @@ Currently support the following data access:
 # To Do
 
 - Generic Client App for data entry
-- Offline / sync support
+- Auth
+- Pulse / offline / sync support
 
 # How to use it?
 

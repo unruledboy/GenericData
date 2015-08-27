@@ -12,7 +12,7 @@ namespace OverflowStack.GenericData.Client
     public class DataClient
     {
         private readonly Uri _uri;
-        private ClientConfig _config;
+        private readonly ClientConfig _config;
 
         public DataClient(Uri uri, string configFile)
         {
@@ -20,7 +20,25 @@ namespace OverflowStack.GenericData.Client
             _config = new ConfigReader(configFile).Read();
         }
 
-        public async Task<Response> Send(Request request)
+        public async Task<PulseResponse> Pulse()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = _uri;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await client.GetAsync("api/service/pulse");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsAsync<PulseResponse>();
+                    return content;
+                }
+                return null;
+            }
+        }
+
+        public async Task<DataResponse> Send(Request request)
         {
             using (var client = new HttpClient())
             {
@@ -31,7 +49,7 @@ namespace OverflowStack.GenericData.Client
                 var response = await client.PostAsJsonAsync("api/service/accept", request);
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsAsync<Response>();
+                    var content = await response.Content.ReadAsAsync<DataResponse>();
                     return content;
                 }
                 return null;

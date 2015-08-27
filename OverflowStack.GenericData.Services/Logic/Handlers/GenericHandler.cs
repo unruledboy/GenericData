@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using OverflowStack.GenericData.ServerDomains;
 using OverflowStack.GenericData.ServerDomains.Handlers;
 using OverflowStack.GenericData.ServerDomains.Models;
 using OverflowStack.GenericData.Services.Logic.Core;
+using OverflowStack.GenericData.SharedDomains;
 using OverflowStack.GenericData.SharedDomains.Models;
 
 namespace OverflowStack.GenericData.Services.Logic.Handlers
@@ -15,7 +15,7 @@ namespace OverflowStack.GenericData.Services.Logic.Handlers
             get { return Constants.HandlerGeneric; }
         }
 
-        public override bool Process(Request request, ServerConfig config, out Response response)
+        public override bool Process(Request request, ServerConfig config, out DataResponse dataResponse)
         {
             var schema = config.Schemas.FirstOrDefault(s => s.Id == request.Payload.Schema);
             if (schema != null)
@@ -27,12 +27,13 @@ namespace OverflowStack.GenericData.Services.Logic.Handlers
                     if (dataAccess != null)
                     {
                         var dataList = dataAccess.Process(request, connection, schema);
-                        response = new Response { CreatedDate = DateTime.Now, Id = request.Id, Payload = new Payload { Schema = request.Payload.Schema, Data = dataList }, Tag = request.Tag };
+                        dataResponse = Utils.CreateResponse<DataResponse>(true, request.Tag);
+                        dataResponse.Payload = new Payload { Schema = request.Payload.Schema, Data = dataList };
                         return true;
                     }
                 }
             }
-            response = null;
+            dataResponse = null;
             return true;
         }
     }
