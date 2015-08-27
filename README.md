@@ -26,9 +26,10 @@ Currently support the following data access:
 # How to use it?
 
 To test:
-1. Simply create a new sql database called `Test`, or you can modify the connection string in "OverflowStack.GenericData.Services\App_Data\ServerConfig.xml" to use existing database.
-2. Run the SQL script file "Documents\SqlServer.sql", once again, if you want, you can modify corresponding database and table name.
-3. Run OverflowStack.GenericData.Services web application
-4. Run OverflowStack.GenericData.Test console application
+
+1.  Simply create a new sql database called `Test`, or you can modify the connection string in "OverflowStack.GenericData.Services\App_Data\ServerConfig.xml" to use existing database.
+2.  Run the SQL script file "Documents\SqlServer.sql", once again, if you want, you can modify corresponding database and table name.
+3.  Run OverflowStack.GenericData.Services web application
+4.  Run OverflowStack.GenericData.Test console application
 
 You should be able to see a new record is created then updated.
