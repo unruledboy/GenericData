@@ -20,10 +20,12 @@ namespace OverflowStack.GenericData.Test
                 var records = response.Payload.Data.Records;
                 if (records.Any())
                 {
+                    Console.WriteLine("record created, press enter to update the record");
+                    Console.ReadLine();
                     response = TestUpdate(client, records.First());
                     OutputResponse(response);
                 }
-                Console.WriteLine("done");
+                Console.WriteLine("record updated");
             }
             else
                 Console.WriteLine("oops");
